@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "mod-template",
+  "version": "${version}",
+
+  "name": "ModTemplate",
+  "description": "",
+  "authors": [],
+  "contact": {},
+
+  "license": "GNU GPL 3.0",
+  "icon": "icon.png",
+
+  "environment": "*",
+  "entrypoints": {},
+  "mixins": [
+    "mod-template.mixins.json",
+    "mod-template-common.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.22",
+    "minecraft": ">=1.20"
+  }
+}
