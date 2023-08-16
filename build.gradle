@@ -10,6 +10,8 @@ architectury {
 subprojects {
     apply plugin: "dev.architectury.loom"
 
+    archivesBaseName = "${rootProject.archives_base_name}-${rootProject.minecraft_version}-${name}"
+
     loom {
         silentMojangMappingsLicense()
     }
@@ -21,14 +23,13 @@ subprojects {
         // The following line declares the yarn mappings you may select this one as well.
         // mappings "net.fabricmc:yarn:@YARN_MAPPINGS@:v2"
     }
-}
 
+}
 allprojects {
     apply plugin: "java"
     apply plugin: "architectury-plugin"
     apply plugin: "maven-publish"
 
-    archivesBaseName = rootProject.archives_base_name
     version = rootProject.mod_version
     group = rootProject.maven_group
 
@@ -38,6 +39,21 @@ allprojects {
         // Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
         // See https://docs.gradle.org/current/userguide/declaring_repositories.html
         // for more information about repositories.
+        mavenCentral()
+
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = "Modrinth"
+                    url = "https://api.modrinth.com/maven"
+                }
+            }
+            filter {
+                includeGroup "maven.modrinth"
+            }
+        }
+
+
     }
 
     tasks.withType(JavaCompile) {

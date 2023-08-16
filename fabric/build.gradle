@@ -17,19 +17,38 @@ configurations {
 
 dependencies {
     modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
-    // Remove the next line if you don't want to depend on the API
-    modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
+
+    // Comment to disable fabric api
+     modApi "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+
+    // Comment to disable architectury api
+     modApi "dev.architectury:architectury-fabric:${rootProject.architectury_version}"
 
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
+
+    modImplementation "maven.modrinth:modmenu:${rootProject.modrinth}"
 }
 
 processResources {
     inputs.property "version", project.version
 
     filesMatching("fabric.mod.json") {
-        expand "version": project.version
+        expand([
+                "modid"       : rootProject.mod_id,
+                "name"        : rootProject.display_name,
+                "version"     : rootProject.mod_version,
+                "minecraft"   : rootProject.minecraft_version,
+                "author"      : rootProject.author,
+                "sourcecode"  : rootProject.sourcecode,
+                "homepage"    : rootProject.homepage,
+                "api"         : rootProject.fabric_api_version,
+                "loader"      : rootProject.fabric_loader_version,
+                "architectury": rootProject.architectury_version,
+                "description" : rootProject.mod_description,
+                "icon"        : rootProject.icon,
+                "license"     : rootProject.license,
+        ])
     }
 }
 
