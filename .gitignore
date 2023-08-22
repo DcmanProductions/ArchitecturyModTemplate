@@ -1,5 +1,9 @@
 # User-specific stuff
-.idea/
+.idea/modules
+.idea/discord.xml 
+.idea/jarRepositories.xml 
+.idea/modules.xml 
+.idea/workspace.xml
 
 *.iml
 *.ipr
